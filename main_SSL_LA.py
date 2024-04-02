@@ -254,7 +254,7 @@ if __name__ == '__main__':
     if args.eval:
         file_eval = genSpoof_list( dir_meta =  os.path.join(args.protocols_path+'{}_cm_protocols/{}.cm.eval.trl.txt'.format(prefix,prefix_2021)),is_train=False,is_eval=True)
         print('no. of eval trials',len(file_eval))
-        eval_set=Dataset_ASVspoof2021_eval(list_IDs = file_eval,base_dir = os.path.join(args.database_path+'ASVspoof2021_{}_eval/'.format(args.track)))
+        eval_set=Dataset_ASVspoof2021_eval(list_IDs = file_eval,base_dir = os.path.join(args.database_path+'LA/ASVspoof2021_{}_eval/'.format(args.track)))
         produce_evaluation_file(eval_set, model, device, args.eval_output)
         sys.exit(0)
    

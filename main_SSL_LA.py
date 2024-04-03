@@ -49,7 +49,9 @@ def produce_evaluation_file(dataset, model, device, save_path):
     fname_list = []
     key_list = []
     score_list = []
-    
+	
+    print('Testtt')
+	
     for batch_x,utt_id in data_loader:
         fname_list = []
         score_list = []  
@@ -64,7 +66,7 @@ def produce_evaluation_file(dataset, model, device, save_path):
         fname_list.extend(utt_id)
         score_list.extend(batch_score.tolist())
 
-	print('Testtt')
+	
         with open(save_path, 'a+') as fh:
             for f, cm in zip(fname_list,score_list):
                 fh.write('{} {}\n'.format(f, cm))

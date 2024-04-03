@@ -63,11 +63,11 @@ def produce_evaluation_file(dataset, model, device, save_path):
         # add outputs
         fname_list.extend(utt_id)
         score_list.extend(batch_score.tolist())
-        
+
+	print('Testtt')
         with open(save_path, 'a+') as fh:
             for f, cm in zip(fname_list,score_list):
                 fh.write('{} {}\n'.format(f, cm))
-		print('Test')
         fh.close()   
     print('Scores saved to {}'.format(save_path))
 

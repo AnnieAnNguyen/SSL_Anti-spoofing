@@ -50,9 +50,7 @@ def produce_evaluation_file(dataset, model, device, save_path):
     key_list = []
     score_list = []
 	
-    for batch_x,utt_id in data_loader:
-	print('Testtt')
-	    
+    for batch_x,utt_id in data_loader:	    
         fname_list = []
         score_list = []  
         batch_size = batch_x.size(0)

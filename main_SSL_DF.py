@@ -41,7 +41,7 @@ def evaluate_accuracy(dev_loader, model, device):
 
 
 def produce_evaluation_file(dataset, model, device, save_path):
-    data_loader = DataLoader(dataset, batch_size=14, shuffle=False, drop_last=False)
+    data_loader = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
     num_correct = 0.0
     num_total = 0.0
     model.eval()
@@ -49,29 +49,28 @@ def produce_evaluation_file(dataset, model, device, save_path):
     fname_list = []
     key_list = []
     score_list = []
-
-    # TESTING
-    output = model(dataset)
-    print(batch_out)
     
-    # for batch_x,utt_id in data_loader:
-    #     fname_list = []
-    #     score_list = []  
-    #     batch_size = batch_x.size(0)
-    #     batch_x = batch_x.to(device)
+    for batch_x,utt_id in data_loader:
+        fname_list = []
+        score_list = []  
+        batch_size = batch_x.size(0)
+        batch_x = batch_x.to(device)
         
-    #     batch_out = model(batch_x)
+        batch_out = model(batch_x)
+
+        print(batch_out)
         
-    #     batch_score = (batch_out[:, 1]  
-    #                    ).data.cpu().numpy().ravel() 
-    #     # add outputs
-    #     fname_list.extend(utt_id)
-    #     score_list.extend(batch_score.tolist())
+        batch_score = (batch_out[:, 1]  
+                       ).data.cpu().numpy().ravel() 
+        # add outputs
+        fname_list.extend(utt_id)
+        score_list.extend(batch_score.tolist())
         
-    #     with open(save_path, 'a+') as fh:
-    #         for f, cm in zip(fname_list,score_list):
-    #             fh.write('{} {}\n'.format(f, cm))
-    #     fh.close()   
+        with open(save_path, 'a+') as fh:
+            for f, cm in zip(fname_list,score_list):
+                fh.write('{} {}\n'.format(f, cm))
+        fh.close()   
+        break
     
     print('Scores saved to {}'.format(save_path))
 

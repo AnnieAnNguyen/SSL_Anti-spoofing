@@ -57,6 +57,9 @@ def produce_evaluation_file(dataset, model, device, save_path):
         batch_x = batch_x.to(device)
         
         batch_out = model(batch_x)
+
+        # TESTING
+        print(batch_out)
         
         batch_score = (batch_out[:, 1]  
                        ).data.cpu().numpy().ravel() 

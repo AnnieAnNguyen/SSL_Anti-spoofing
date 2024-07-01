@@ -49,28 +49,30 @@ def produce_evaluation_file(dataset, model, device, save_path):
     fname_list = []
     key_list = []
     score_list = []
-    
-    for batch_x,utt_id in data_loader:
-        fname_list = []
-        score_list = []  
-        batch_size = batch_x.size(0)
-        batch_x = batch_x.to(device)
-        
-        batch_out = model(batch_x)
 
-        # TESTING
-        print(batch_out)
+    # TESTING
+    output = model(dataset)
+    print(batch_out)
+    
+    # for batch_x,utt_id in data_loader:
+    #     fname_list = []
+    #     score_list = []  
+    #     batch_size = batch_x.size(0)
+    #     batch_x = batch_x.to(device)
         
-        batch_score = (batch_out[:, 1]  
-                       ).data.cpu().numpy().ravel() 
-        # add outputs
-        fname_list.extend(utt_id)
-        score_list.extend(batch_score.tolist())
+    #     batch_out = model(batch_x)
         
-        with open(save_path, 'a+') as fh:
-            for f, cm in zip(fname_list,score_list):
-                fh.write('{} {}\n'.format(f, cm))
-        fh.close()   
+    #     batch_score = (batch_out[:, 1]  
+    #                    ).data.cpu().numpy().ravel() 
+    #     # add outputs
+    #     fname_list.extend(utt_id)
+    #     score_list.extend(batch_score.tolist())
+        
+    #     with open(save_path, 'a+') as fh:
+    #         for f, cm in zip(fname_list,score_list):
+    #             fh.write('{} {}\n'.format(f, cm))
+    #     fh.close()   
+    
     print('Scores saved to {}'.format(save_path))
 
 def train_epoch(train_loader, model, lr,optim, device):

@@ -41,7 +41,7 @@ def evaluate_accuracy(dev_loader, model, device):
 
 
 def produce_evaluation_file(dataset, model, device, save_path):
-    data_loader = DataLoader(dataset, batch_size=1, shuffle=False, drop_last=False)
+    data_loader = DataLoader(dataset, batch_size=50, shuffle=False, drop_last=False)
     num_correct = 0.0
     num_total = 0.0
     model.eval()
@@ -70,7 +70,6 @@ def produce_evaluation_file(dataset, model, device, save_path):
             for f, cm in zip(fname_list,score_list):
                 fh.write('{} {}\n'.format(f, cm))
         fh.close()   
-        break
     
     print('Scores saved to {}'.format(save_path))
 
